@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Ip Address</title>
+</head>
+<body onload="getHomeIp()">
+
+
+<h1 id="homeAddress"> </h1> <br><br>
+<p id="updated"></p>
+
+
+</body>
+
+
+<script>
+
+    function getHomeIp() {
+        let ipAddress = sendGetRequest("/api/getHomeIp");
+        document.getElementById("homeAddress").innerHTML = "This is the home ip: " + ipAddress.ip;
+        document.getElementById("updated").innerHTML = "Updated: " + ipAddress.lastUpdated;
+    }
+    function sendGetRequest(url) {
+        let req = new XMLHttpRequest();
+        req.open("GET",url,false);
+        req.send();
+        return JSON.parse(req.response);
+    }
+
+
+</script>
+</html>
